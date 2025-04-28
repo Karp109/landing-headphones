@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <script src="https://unpkg.com/phosphor-icons"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Наушники для плавания</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- Иконки -->
+  <script src="https://unpkg.com/phosphor-icons"></script>
+
+  <!-- Маска для телефона -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js"></script>
 </head>
+
 <body>
 
+  <!-- Первый экран -->
   <section class="hero">
     <div class="container">
       <h1>Музыка даже под водой</h1>
@@ -16,6 +23,8 @@
       <a href="#order" class="btn">Заказать со скидкой</a>
     </div>
   </section>
+
+  <!-- Блок преимуществ -->
   <section class="benefits">
     <div class="container">
       <h2>Почему именно эти наушники?</h2>
@@ -45,13 +54,16 @@
           <h3>Водонепроницаемость IPX8</h3>
           <p>Полная защита от воды — можно плавать, нырять и тренироваться без ограничений.</p>
         </div>
-          <div class="benefit">
+        <div class="benefit">
           <i class="ph ph-battery-charging"></i>
           <h3>До 8 часов автономной работы</h3>
           <p>Зарядки хватит на несколько тренировок подряд — без подзарядки.</p>
         </div>
-      
+      </div>
+    </div>
   </section>
+
+  <!-- Блок "Как это работает" -->
   <section class="how-it-works">
     <div class="container">
       <h2>Как это работает?</h2>
@@ -68,42 +80,83 @@
           <span class="step-number">3</span>
           <p>В бассейне — запускай MP3 и наслаждайся звуком под водой.</p>
         </div>
-        <section class="reviews">
-  <div class="container">
-    <h2>Отзывы наших клиентов</h2>
-    <div class="reviews-list">
-      <div class="review">
-        <p>“Идеальные наушники для плавания! Качество звука отличное, держатся крепко. Теперь каждую тренировку слушаю музыку.”</p>
-        <h4>— Алексей, 32 года</h4>
-      </div>
-      <div class="review">
-        <p>“Удивило, насколько удобно использовать. Зарядки хватает надолго, а костная проводимость — это просто вау!”</p>
-        <h4>— Мария, 29 лет</h4>
-      </div>
-      <div class="review">
-        <p>“Сначала сомневался, но теперь не представляю плавание без музыки. Вода — не помеха, всё супер.”</p>
-        <h4>— Дмитрий, 41 год</h4>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="order">
-  <div class="container">
-    <h2>Заказать наушники прямо сейчас</h2>
-    <form class="order-form">
-      <input type="text" name="name" placeholder="Ваше имя" required>
-      <input type="tel" name="phone" placeholder="Телефон" required>
-      <button type="submit" class="btn">Оформить заказ</button>
-    </form>
-  </div>
-</section>
-
-
       </div>
     </div>
   </section>
-  
-  
+
+  <!-- Блок отзывов -->
+  <section class="reviews">
+    <div class="container">
+      <h2>Отзывы наших клиентов</h2>
+      <div class="reviews-list">
+        <div class="review">
+          <p>“Идеальные наушники для плавания! Качество звука отличное, держатся крепко. Теперь каждую тренировку слушаю музыку.”</p>
+          <h4>— Алексей, 32 года</h4>
+        </div>
+        <div class="review">
+          <p>“Удивило, насколько удобно использовать. Зарядки хватает надолго, а костная проводимость — это просто вау!”</p>
+          <h4>— Мария, 29 лет</h4>
+        </div>
+        <div class="review">
+          <p>“Сначала сомневался, но теперь не представляю плавание без музыки. Вода — не помеха, всё супер.”</p>
+          <h4>— Дмитрий, 41 год</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Блок заказа -->
+  <section class="order" id="order">
+    <div class="container">
+      <h2>Заказать наушники прямо сейчас</h2>
+      <form class="order-form" id="orderForm" action="https://formspree.io/f/xnndnykg" method="POST">
+        <input type="text" name="name" placeholder="Ваше имя" required>
+        <input type="tel" name="phone" placeholder="Телефон" required>
+        <button type="submit" class="btn">Оформить заказ</button>
+      </form>
+
+      <div id="successMessage" style="display:none; font-size: 24px; color: green; margin-top: 20px;">
+        Спасибо за заявку! Мы с вами свяжемся.
+      </div>
+    </div>
+  </section>
+
+  <!-- Скрипты -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const phoneInput = document.querySelector('input[name="phone"]');
+      if (phoneInput) {
+        const mask = new Inputmask("+7 (999) 999-99-99");
+        mask.mask(phoneInput);
+      }
+
+      const form = document.getElementById('orderForm');
+      const successMessage = document.getElementById('successMessage');
+
+      if (form) {
+        form.addEventListener('submit', async function(event) {
+          event.preventDefault();
+
+          const formData = new FormData(form);
+          const response = await fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
+
+          if (response.ok) {
+            form.style.display = 'none';
+            successMessage.style.display = 'block';
+          } else {
+            alert('Произошла ошибка. Попробуйте ещё раз!');
+          }
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>
+
