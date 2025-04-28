@@ -9,11 +9,9 @@
   <!-- Иконки -->
   <script src="https://unpkg.com/phosphor-icons"></script>
 
-  <!-- Маска для телефона -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js"></script>
+  <!-- jQuery + Inputmask для телефона -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
 </head>
 
 <body>
@@ -23,12 +21,14 @@
     <div class="container">
       <h1>Музыка даже под водой</h1>
       <p>Наушники с MP3 и Bluetooth — идеальны для плавания</p>
-      <a href="#order" class="btn">Заказать со скидкой</a>
-<div class="price-block">
-  <span class="old-price">7990 ₽</span>
-  <span class="new-price">4990 ₽</span>
-</div>
+      
+      <div class="price-block">
+        <span class="old-price">7990 ₽</span>
+        <span class="new-price">4990 ₽</span>
+      </div>
 
+      <a href="#order" class="btn">Заказать со скидкой</a>
+    </div>
   </section>
 
   <!-- Блок преимуществ -->
@@ -132,14 +132,14 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       $('input[name="phone"]').inputmask("+7 (999) 999-99-99");
-    
+
       const form = document.getElementById('orderForm');
       const successMessage = document.getElementById('successMessage');
-    
+
       if (form) {
         form.addEventListener('submit', async function(event) {
           event.preventDefault();
-    
+
           const formData = new FormData(form);
           const response = await fetch(form.action, {
             method: form.method,
@@ -148,7 +148,7 @@
               'Accept': 'application/json'
             }
           });
-    
+
           if (response.ok) {
             form.style.display = 'none';
             successMessage.style.display = 'block';
@@ -158,19 +158,18 @@
         });
       }
     });
-    </script>
-<script>
-  window.addEventListener('pageshow', function() {
-    const form = document.getElementById('orderForm');
-    const successMessage = document.getElementById('successMessage');
-  
-    if (form && successMessage && successMessage.style.display === 'block') {
-      form.style.display = 'block';
-      successMessage.style.display = 'none';
-    }
-  });
+
+    // При возврате назад на страницу — сбрасываем форму
+    window.addEventListener('pageshow', function() {
+      const form = document.getElementById('orderForm');
+      const successMessage = document.getElementById('successMessage');
+
+      if (form && successMessage && successMessage.style.display === 'block') {
+        form.style.display = 'block';
+        successMessage.style.display = 'none';
+      }
+    });
   </script>
-      
 
 </body>
 </html>
