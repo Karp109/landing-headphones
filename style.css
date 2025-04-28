@@ -244,6 +244,23 @@ body {
     .hero p {
       font-size: 18px;
     }
+    .price-block {
+      margin: 20px 0;
+      font-size: 24px;
+    }
+    
+    .old-price {
+      text-decoration: line-through;
+      color: #999;
+      margin-right: 10px;
+    }
+    
+    .new-price {
+      color: #ff6f00;
+      font-weight: bold;
+      font-size: 28px;
+    }
+    
   }
   
   
