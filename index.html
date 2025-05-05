@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Наушники для плавания</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/scrollreveal"></script>
+
 
   <!-- Иконки -->
   <script src="https://unpkg.com/phosphor-icons"></script>
@@ -27,9 +29,13 @@
         <span class="new-price">4990 ₽</span>
       </div>
 
-      <a href="#order" class="btn">Заказать со скидкой</a>
-    </div>
-  </section>
+      <<a href="#order" class="btn">Заказать со скидкой</a>
+
+      <div class="price-block">
+        <span class="old-price">7990 ₽</span>
+        <span class="new-price">4990 ₽</span>
+      </div>
+      
 
   <!-- Блок преимуществ -->
   <section class="benefits">
@@ -170,6 +176,25 @@
       }
     });
   </script>
+<script>
+  ScrollReveal().reveal('.benefit', {
+    origin: 'bottom',
+    distance: '40px',
+    duration: 800,
+    easing: 'ease-out',
+    interval: 200,
+    reset: false
+  });
+
+  ScrollReveal().reveal('.step, .review', {
+    origin: 'left',
+    distance: '50px',
+    duration: 800,
+    easing: 'ease-out',
+    interval: 200,
+    reset: false
+  });
+</script>
 
 </body>
 </html>
